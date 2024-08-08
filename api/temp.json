@@ -1,0 +1,25 @@
+{
+    "id": 1,
+    "name": "Учитель",
+    "balance": 400,
+    "income": {
+        "base": 3300
+    },
+    "expenses": {
+        "tax": 500,
+        "houseMortgagePayment": 500,
+        "studentLoanPayment": 100,
+        "carLoanPayment": 100,
+        "creditCardPayment": 200,
+        "otherExpenses": 500,
+        "bankLoanPayment": 0,
+        "childrenExpenses": 200
+    },
+    "liabilities": {
+        "houseMortgage": 50000,
+        "educationLoans": 12000,
+        "carLoans": 5000,
+        "creditCardDebt": 5000
+    }
+
+}
