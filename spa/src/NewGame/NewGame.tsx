@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 
 import logo from './logo.svg';
-import '../App.css';
+import '../assets/App.css';
 import { Input, Button } from "antd";
 // import style from './index.module.scss'
 
 // import { Button, Space, DatePicker, version } from 'antd';
 import { Select } from "antd"
-import axios from 'axios';
 
 function NewGame() {
     console.log('History')
@@ -39,7 +38,6 @@ function NewGame() {
             <tbody>
             {littleOrder.map((item:any, i) =>
                 <tr>
-                    {JSON.stringify(item)}
                     <td>{ item?.['name'] }</td>
                     <td>{ item?.['price'] }</td>
                     <td>{ item?.['value'] }$</td>

@@ -1,16 +1,11 @@
 import React from 'react';
-import Main from './Main';
-import Start from './Start';
-import History from './History/History';
-
-import './App.css';
+import Game from './Game/Game';
+import './assets/App.css';
 
 const App = () => {
   return (
     <div className="app-block">
-      <Start/>
-      <Main/>
-      <History/>
+      <Game/>
     </div>
   );
 }

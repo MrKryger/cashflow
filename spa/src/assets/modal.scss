@@ -1,0 +1,136 @@
+$h1: #005c96;
+$hover: #005c96;
+$padding: 20px;
+$z-index: 2000;
+.modal {
+  &-mask {
+    position: fixed;
+    z-index: $z-index;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    display: table;
+    transition: opacity .3s ease;
+  }
+
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  &-container {
+    margin: 0 auto;
+    max-width: 640px;
+    min-width: 320px;
+    transition: all .3s ease;
+  }
+
+  &-headers {
+    padding: $padding;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &-title {
+    font-size: 1.3em;
+    color: $h1;
+    cursor: default;
+    text-transform: uppercase;
+    text-align: left;
+  }
+
+  &-close {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+
+    &:hover {
+      color: $hover;
+      background-color: rgba(0, 0, 0, .1);
+    }
+  }
+
+  &-card-separator {
+    border-bottom: 2px solid $h1;
+  }
+
+  &-body {
+    max-height: 600px;
+    padding: $padding;
+    text-align: left;
+    height: inherit;
+    overflow: auto;
+  }
+
+  &-enter {
+    opacity: 0;
+  }
+
+  &-leave-active {
+    opacity: 0;
+  }
+
+  &-enter .modal-container,
+  &-leave-active .modal-container {
+    transform: scale(1.1);
+  }
+
+  &-close_1 {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+
+    &:hover {
+      &::before, &::after {
+        background: $h1;
+      }
+    }
+
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      height: 1px;
+      width: 100%;
+      top: 50%;
+      left: 0;
+      margin-top: -1px;
+      background: $h1;
+    }
+
+    &::before {
+      transform: (rotate(45deg));
+    }
+
+    &::after {
+      transform: (rotate(-45deg));
+    }
+
+    &.big {
+      transform: (scale(3));
+    }
+
+    &.rounded {
+      &::before, &::after {
+        border-radius: 5px;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-mask {
+    .container {
+      width: 94%;
+    }
+  }
+}

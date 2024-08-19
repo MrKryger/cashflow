@@ -1,2 +1,3 @@
 pip3 install django-import-export
-pip install django-cors-headers
+pip3 install django-cors-headers
+pip3 install random
