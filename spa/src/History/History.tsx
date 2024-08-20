@@ -164,7 +164,7 @@ function History() {
             </thead>
             <tbody>
             {littleOrder.map((item: any, i) =>
-                <tr>
+                <tr key={i}>
                     <td>{item?.['name']}</td>
                     <td>{item?.['price']} $</td>
                     <td>

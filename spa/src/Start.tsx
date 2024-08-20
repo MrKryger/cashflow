@@ -1,38 +1,34 @@
 import React, {useState} from 'react'
 
-import logo from './logo.svg';
 import './assets/App.css';
 import {Input, Button} from "antd";
 import api from "./hepler/api";
 // import style from './index.module.scss'
-
 // import { Button, Space, DatePicker, version } from 'antd';
-import {Select} from "antd"
-import { setCookie } from "./hepler/cookie";
+// import {Select} from "antd"
+import { connect } from 'react-redux';
+import { setGame, setGameId, setGamePassword } from './store/actions'
 
-function Start() {
-    console.log('Start')
-    const [room, setRoom] = useState(null)
-    const [passRoom, setPassRoom] = useState(null)
-
+function Start({ dispatch, games }:any) {
     const onChangeRoom = (event: any) => {
-        setRoom(event.target.value)
+        dispatch(setGameId(event.target.value))
     }
     const onChangePass = (event: any) => {
-        setPassRoom(event.target.value)
+        dispatch(setGamePassword(event.target.value))
     }
 
     const onNewGame = async () => {
         const result = await api.get('create_game')
         console.log(result)
         if (result?.id) {
-            setRoom(result.id)
-            setPassRoom(result.password)
+            // setRoom(result.id)
+            dispatch(setGame({ id: result.id, password: result.password }))
         }
     }
     const onSignGame = () => {
-        setCookie('room', String(room))
-        setCookie('passRoom', String(passRoom))
+        const data = { id: Number(games?.id), password: Number(games?.password) }
+        console.log({data})
+        dispatch(setGame(data))
     }
 
 //   const options:any = start()
@@ -41,19 +37,21 @@ function Start() {
         <div className="main-block">
             <h3 className='my-1'>
                 Войдите в игру или Создайте новую
+                -{JSON.stringify(games)}-
+
             </h3>
             <div className='flex mb-1'>
                 <Input
                     placeholder="Номер Комнаты"
                     size="large"
-                    value={room || ''}
+                    value={games.id || ''}
                     onChange={onChangeRoom}
                     className='mr-1'
                 />
                 <Input
                     placeholder="Пароль Комнаты"
                     size="large"
-                    value={passRoom || ''}
+                    value={games.password || ''}
                     onChange={onChangePass}
                 />
             </div>
@@ -62,7 +60,7 @@ function Start() {
                 block
                 className='mb-1'
                 onClick={onSignGame}
-                disabled={!passRoom}
+                disabled={!games?.password}
                 type='primary'>
                 Вход в Игру
             </Button>
@@ -78,4 +76,4 @@ function Start() {
     );
 }
 
-export default Start;
+export default connect()(Start)

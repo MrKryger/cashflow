@@ -8,19 +8,16 @@ import api from './hepler/api';
 // import { Button, Space, DatePicker, version } from 'antd';
 import {Select} from "antd"
 
-function Main() {
-    console.log('Main')
+function Main({games}:any) {
     const [options, setOptions] = useState([])
     const [user, setUser] = useState(null)
     const setValueUser = (data: any) => {
         setUser(data)
     }
-    const setValue = (data: any) => {
-        if (data) setOptions(data)
-    }
+
     const start = async () => {
         const result = await api.get('list')
-        setValue(result)
+        setOptions(result)
     }
     if (options.length === 0) {
         start()
@@ -31,23 +28,22 @@ function Main() {
 
     const getItem = async (id: number) => {
         const result = await api.get(`item/${id}`)
-        setValue(result)
+        setUser(result)
     }
 //   const options:any = start()
 
     return (
         <div className="main-block">
             <div>
+                {JSON.stringify(options)}
                 <Select
                     size="large"
-                    defaultValue="Select"
+                    defaultValue="Выберите профессию"
                     onChange={handleChange}
                     options={options}
                     className='select'
                 />
             </div>
-            {/* {JSON.stringify(user)} */}
-
             <table className="iksweb">
                 <tbody>
                 <tr>
@@ -98,8 +94,6 @@ function Main() {
                     <td>{user?.['expenses']['childrenExpenses']} $</td>
                     <td className='danger-text'>- 0 $</td>
                 </tr>
-
-
                 <tr>
                     <td><b>Итог</b></td>
                     <td className='primary-text'>~{user?.['balance']} $</td>
