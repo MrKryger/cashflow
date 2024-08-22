@@ -1,54 +1,14 @@
-import React, {useState} from 'react'
-
-import logo from './logo.svg';
+import React from 'react'
 import './assets/App.css';
-import api from './hepler/api';
-// import style from './index.module.scss'
 
-// import { Button, Space, DatePicker, version } from 'antd';
-import {Select} from "antd"
-
-function Main({games}:any) {
-    const [options, setOptions] = useState([])
-    const [user, setUser] = useState(null)
-    const setValueUser = (data: any) => {
-        setUser(data)
-    }
-
-    const start = async () => {
-        const result = await api.get('list')
-        setOptions(result)
-    }
-    if (options.length === 0) {
-        start()
-    }
-    const handleChange = (event: any) => {
-        getItem(event)
-    }
-
-    const getItem = async (id: number) => {
-        const result = await api.get(`item/${id}`)
-        setUser(result)
-    }
-//   const options:any = start()
-
+function Main({games, user}: any) {
     return (
         <div className="main-block">
-            <div>
-                {JSON.stringify(options)}
-                <Select
-                    size="large"
-                    defaultValue="Выберите профессию"
-                    onChange={handleChange}
-                    options={options}
-                    className='select'
-                />
-            </div>
             <table className="iksweb">
                 <tbody>
                 <tr>
                     <td>Профессия</td>
-                    <td>{user?.['name']}</td>
+                    <td><b>{user?.['name']}</b></td>
                     <td>{user?.['income']['base']}$</td>
                 </tr>
                 <tr>

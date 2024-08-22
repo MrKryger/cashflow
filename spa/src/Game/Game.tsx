@@ -3,17 +3,18 @@ import Main from '../Main';
 import Start from '../Start';
 import History from '../History/History';
 import { connect } from 'react-redux'
+import {localGet} from "../hepler/storage";
 
 const Game = ({ games }:any) => {
-
+    const [user] = useState(localGet('user'))
     return (
         <div>
-            -{JSON.stringify(games)}-
             <Start games={games}/>
-            {games?.id &&
-              <div key={games.id}>
-                <Main games={games}/>
-                {/*<History/>*/}
+            +{JSON.stringify(games)}
+            {games?.userId &&
+              <div key={games.userId}>
+                <Main games={games} user={user}/>
+                <History/>
               </div>
             }
 
@@ -21,9 +22,12 @@ const Game = ({ games }:any) => {
     );
 }
 
-const mapStateToProps = (state:any) => ({
-    games: state.games
+const mapStateToProps = ({ games }:any) => ({
+    games,
 })
+// const mapDispatchToProps = (dispatch: any) => ({
+//     SET_GAMES: (data:any) => dispatch({ type: 'SET_GAME' , data }),
+// })
 
 export default connect(mapStateToProps)(Game);
 

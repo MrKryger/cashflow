@@ -7,21 +7,16 @@ const headers = {
 
 export default {
     get: async (method:string) => {
-        const config = {
-            mode: 'no-corse',
-            headers,
-        }
-        const data = await axios.get(`${hostname}/${method}`, config)
+        // const config = {
+        //     mode: 'no-corse',
+        //     headers,
+        // }
+        const data = await axios.get(`${hostname}/${method}`)
         return data?.data?.data || null
     },
 
     post: async (method:string, body:any) => {
-        const config = {
-            mode: 'no-corse',
-            headers,
-            body
-        }
-        const data = await axios.post(`${hostname}/${method}`, config)
+        const data = await axios.post(`${hostname}/${method}`, body)
         return data?.data?.data || null
     }
 }

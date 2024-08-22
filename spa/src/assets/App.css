@@ -135,3 +135,10 @@ table.iksweb th {
   /*justify-content: center;*/
   /*width: 100% !important;*/
 }
+
+.dark-select {
+  /*color: transparent !important;*/
+}
+.dark-select:disabled {
+  color: white !important;
+}

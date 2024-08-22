@@ -1,7 +1,5 @@
-interface IGame {
-    id: number | null,
-    password: number | null,
-}
+import {IGame} from "../int/interface";
+
 export const setGame = (data:IGame) => ({
     type: 'SET_GAME',
     data
